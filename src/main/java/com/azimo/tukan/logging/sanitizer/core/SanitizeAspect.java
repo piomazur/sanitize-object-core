@@ -1,4 +1,4 @@
-package com.azimo.pio.sanitizer.core;
+package com.azimo.tukan.logging.sanitizer.core;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -25,7 +25,7 @@ public class SanitizeAspect {
 
     private static final Logger log = LoggerFactory.getLogger(SanitizeAspect.class);
 
-    @Around("execution(* toString()) && @within(com.azimo.pio.sanitizer.core.Sanitized)")
+    @Around("execution(* toString()) && @within(com.azimo.tukan.logging.sanitizer.core.Sanitized)")
     public Object sanitizeMethod(ProceedingJoinPoint pjp) throws Throwable {
         try {
             Set<Field> fields = findAnnotatedFields(pjp.getStaticPart().getSignature().getDeclaringType(), Sanitize.class);
@@ -59,7 +59,7 @@ public class SanitizeAspect {
 
     private void setSanitizedValues(final ProceedingJoinPoint pjp, final List<PropertyDescriptor> propertyDescriptors, final Map<String, String> previousValues) {
         propertyDescriptors.stream()
-                .forEach(propertyDescriptor -> callFieldSetter(sanitizeValue(previousValues.get(propertyDescriptor.getName())), propertyDescriptor, pjp));
+                .forEach(propertyDescriptor -> callFieldSetter(SanitizeUtils.sanitizeValue(previousValues.get(propertyDescriptor.getName())), propertyDescriptor, pjp));
     }
 
     private Map<String, String> collectPreviousValues(final ProceedingJoinPoint pjp, final List<PropertyDescriptor> propertyDescriptors) {
@@ -68,9 +68,7 @@ public class SanitizeAspect {
                         toMap(propertyDescriptor -> propertyDescriptor.getName(), propertyDescriptor -> callFieldGetter(pjp, propertyDescriptor)));
     }
 
-    private String sanitizeValue(final String value) {
-        return value.replaceAll(".", "*");
-    }
+
 
     private void callFieldSetter(final String value, final PropertyDescriptor propertyDescriptor, final ProceedingJoinPoint pjp) {
         try {

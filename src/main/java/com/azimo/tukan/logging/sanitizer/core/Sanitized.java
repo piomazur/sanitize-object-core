@@ -1,4 +1,4 @@
-package com.azimo.pio.sanitizer.core;
+package com.azimo.tukan.logging.sanitizer.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -10,6 +10,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 @Inherited
 public @interface Sanitized {
-
     String name() default "";
 }
