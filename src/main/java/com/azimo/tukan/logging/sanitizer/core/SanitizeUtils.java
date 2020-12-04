@@ -13,7 +13,7 @@ public class SanitizeUtils {
 
         return value.substring(0, index)
                 + generateStarts(starsLength)
-                + value.substring(index + starsLength, value.length());
+                + value.substring(index + starsLength);
     }
 
     private static String generateStarts(final int length) {
