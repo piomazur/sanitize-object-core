@@ -1,6 +1,6 @@
-package com.azimo.tukan.logging.sanitizer;
+package com.azimo.tukan.log.sanitizer;
 
-import com.azimo.tukan.logging.sanitizer.core.SanitizeAspect;
+import com.azimo.tukan.log.sanitizer.core.SanitizeAspect;
 import org.aspectj.lang.Aspects;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,6 @@ public class SanitizeConfiguration {
 
     @Bean
     public SanitizeAspect sanitizeAspect() {
-        SanitizeAspect sanitizeAspect = Aspects.aspectOf(SanitizeAspect.class);
-        return sanitizeAspect;
+        return Aspects.aspectOf(SanitizeAspect.class);
     }
 }

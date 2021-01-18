@@ -1,4 +1,4 @@
-package com.azimo.tukan.logging.sanitizer;
+package com.azimo.tukan.log.sanitizer;
 
 import org.springframework.context.annotation.Import;
 

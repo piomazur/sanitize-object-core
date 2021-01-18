@@ -1,4 +1,4 @@
-package com.azimo.tukan.logging.sanitizer.core;
+package com.azimo.tukan.log.sanitizer.core;
 
 public class SanitizationException extends RuntimeException {
     public SanitizationException(String message, Throwable cause) {

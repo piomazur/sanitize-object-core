@@ -1,4 +1,4 @@
-package com.azimo.tukan.logging.sanitizer.core;
+package com.azimo.tukan.log.sanitizer.core;
 
 public class SanitizeUtils {
 
@@ -8,19 +8,18 @@ public class SanitizeUtils {
         }
 
         int ceil = (int)Math.round(value.length() / 3d);
-        final int index = ceil;
         final int starsLength = Math.max(1, ceil);
 
-        return value.substring(0, index)
+        return value.substring(0, ceil)
                 + generateStarts(starsLength)
-                + value.substring(index + starsLength);
+                + value.substring(ceil + starsLength);
     }
 
     private static String generateStarts(final int length) {
-        String stars = "";
+        StringBuilder stars = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            stars += "*";
+            stars.append("*");
         }
-        return stars;
+        return stars.toString();
     }
 }
